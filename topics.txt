@@ -1,0 +1,7 @@
+PowerShell Topics
+1. Variables
+2. Conditional statements and cycles
+3. Functions
+4. Objects
+5. Pipes
+6. Modules
