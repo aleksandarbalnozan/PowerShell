@@ -11,7 +11,7 @@ $help = @{
     "ShowCSV"      = "Syntax: ShowCSV";
     "FindPerson"   = "Syntax: FindPerson -FirstName string -LastName string"
 }
-
+$CURRENT_LOCATION = Get-Location;
 function AddPerson {
     $FirstName = Read-Host "Enter the First Name of Person you want to add "
     $LastName = Read-Host "Enter the Last Name of Person you want to add "
@@ -21,15 +21,15 @@ function AddPerson {
         LastName  = "$LastName";
         Age       = $Age
     }
-    $person | Export-Csv -Append -Path .\Person.csv -NoTypeInformation -Force
+    $person | Export-Csv -Append -Path $CURRENT_LOCATION\Person.csv -NoTypeInformation -Force
 }
 
 function RemovePerson {
     $FirstName = Read-Host "Enter the First Name of Person you want to remove "
     $LastName = Read-Host "Enter the Last Name of Person you want to remove "
-    FINDSTR /V /C:"$FirstName" /C:"$LastName" .\Person.csv > .\Person1.csv
+    FINDSTR /V /C:"$FirstName" /C:"$LastName" $CURRENT_LOCATION\Person.csv > $CURRENT_LOCATION\Person1.csv
     # Select-String -Path .\Person.csv -Pattern "$FirstName", "$LastName" -NotMatch | Export-Csv -Path .\Person1.csv -NoTypeInformation
-    Import-Csv -Path .\Person1.csv | Export-Csv -Path .\Person.csv -NoTypeInformation
+    Import-Csv -Path $CURRENT_LOCATION\Person1.csv | Export-Csv -Path $CURRENT_LOCATION\Person.csv -NoTypeInformation
 }
 
 function ShowCSV {
@@ -39,7 +39,7 @@ function ShowCSV {
 function FindPerson {
     $FirstName = Read-Host "Enter the First Name of Person you want to find "
     $LastName = Read-Host "Enter the Last Name of Person you want to find "
-    $Person = Import-Csv -Path .\Person.csv | Where-Object { $_.FirstName -eq $FirstName -or $_.LastName -eq $LastName } 
+    $Person = Import-Csv -Path $CURRENT_LOCATION\Person.csv | Where-Object { $_.FirstName -eq $FirstName -or $_.LastName -eq $LastName } 
     if ($Person.Count -gt 0) {
         $Person | Format-Table
     }
@@ -76,5 +76,3 @@ while ($true) {
         }
     }
 }
-
-Export-ModuleMember -Function ShowCSV
