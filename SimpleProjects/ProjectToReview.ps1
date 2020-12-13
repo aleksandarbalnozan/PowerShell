@@ -76,3 +76,5 @@ while ($true) {
         }
     }
 }
+
+Export-ModuleMember -Function ShowCSV

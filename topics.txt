@@ -5,3 +5,18 @@ PowerShell Topics
 4. Objects
 5. Pipes
 6. Modules
+
+
+
+
+Good solution overall, we'll go over minor details tomorrow. However, the main point of scripts in general is to automate routine tasks. So I suggest that the script will do things automatically when run by user, instead of just loading functions into memory and allowing user to utilize them like it does now.
+
+What we want to achieve is that when user runs the script with PowerShell, it would automatically open a file/ask user for input/update the file.
+
+If you want additional practice, you can use this existing script as a function library or even a module (see dot-sourcing and Import-Module) and utilize functions in a new one, that will run commands automatically.Oh, and consider replacing FINDSTR with Select-String.
+
+
+
+When script is run
+1) ask what sort of action should be performed
+2) ask for input and automaticly perform action
