@@ -55,3 +55,13 @@ function Get-Template([string]$resourceGroupName) {
     Export-AzResourceGroup -ResourceGroupName $resourceGroupName
 }
 
+function Add-FromTemplate([string]$resourceGroupName, [string]$location, [string]$deploymentName) {
+    Add-Resource -location $location -resourceGroupName $resourceGroupName
+
+    $tempFile = ""
+    $paramFile = ""
+
+    New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $tempFile -TemplateParameterFile $paramFile -storage
+}
+
+Add-FromTemplate
